@@ -1,0 +1,21 @@
+
+> cargo-flash@1.0.0 dev
+> next dev --turbopack
+
+ ÔÜá Warning: Next.js inferred your workspace root, but it may not be correct.
+ We detected multiple lockfiles and selected the directory of C:\Users\PC GAMER\package-lock.json as the root directory.
+ To silence this warning, set `turbopack.root` in your Next.js config, or consider removing one of the lockfiles if it's not needed.
+   See https://nextjs.org/docs/app/api-reference/config/next-config-js/turbopack#root-directory for more information.
+ Detected additional lockfiles: 
+   * C:\Users\PC GAMER\Desktop\Cargo Flash\package-lock.json
+
+ ÔÜá Port 3000 is in use by process 32416, using available port 3002 instead.
+   Ôû▓ Next.js 15.5.9 (Turbopack)
+   - Local:        http://localhost:3002
+   - Network:      http://192.168.1.3:3002
+   - Environments: .env.local
+   - Experiments (use with caution):
+     ┬À serverActions
+
+ Ô£ô Starting...
+ Ô£ô Ready in 1697ms

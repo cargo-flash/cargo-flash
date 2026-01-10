@@ -1,0 +1,34 @@
+'use client'
+
+import {
+    Shield,
+    Lock,
+    CheckCircle
+} from 'lucide-react'
+
+interface SecurityBadgesProps {
+    isVerified?: boolean
+}
+
+export function SecurityBadges({ isVerified = true }: SecurityBadgesProps) {
+    return (
+        <div className="py-6 border-t border-slate-100">
+            <div className="flex flex-wrap items-center justify-center gap-6 text-xs text-slate-500">
+                <div className="flex items-center gap-1.5">
+                    <Shield className="w-4 h-4 text-slate-400" />
+                    <span>Carga Segurada</span>
+                </div>
+                <div className="flex items-center gap-1.5">
+                    <Lock className="w-4 h-4 text-slate-400" />
+                    <span>Dados Protegidos</span>
+                </div>
+                {isVerified && (
+                    <div className="flex items-center gap-1.5">
+                        <CheckCircle className="w-4 h-4 text-[#166534]" />
+                        <span>Código Verificado</span>
+                    </div>
+                )}
+            </div>
+        </div>
+    )
+}

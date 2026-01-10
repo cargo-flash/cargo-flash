@@ -1,0 +1,328 @@
+/**
+ * Cargo Flash Tracking - Frontend Styles
+ */
+
+/* Order Tracking Section */
+.cft-order-tracking {
+    margin: 30px 0;
+    padding: 20px;
+    background: #f8fafc;
+    border-radius: 12px;
+}
+
+.cft-order-tracking h2 {
+    margin: 0 0 20px 0;
+    font-size: 20px;
+    color: #1f2937;
+}
+
+.cft-tracking-card {
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 20px;
+}
+
+.cft-tracking-code {
+    margin-bottom: 15px;
+}
+
+.cft-tracking-code .label {
+    display: block;
+    font-size: 12px;
+    color: #6b7280;
+    margin-bottom: 5px;
+}
+
+.cft-tracking-code .code {
+    display: inline-block;
+    background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%);
+    color: #00ff41;
+    padding: 8px 15px;
+    border-radius: 6px;
+    font-family: monospace;
+    font-size: 14px;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.cft-tracking-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 15px;
+    background: color-mix(in srgb, var(--status-color) 15%, transparent);
+    border: 1px solid var(--status-color);
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+.cft-tracking-status .icon {
+    font-size: 20px;
+}
+
+.cft-tracking-status .label {
+    font-weight: 600;
+    color: var(--status-color);
+}
+
+.cft-tracking-location,
+.cft-tracking-eta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #4b5563;
+    margin-bottom: 10px;
+}
+
+.cft-tracking-link {
+    margin-top: 20px;
+}
+
+.cft-btn {
+    display: inline-block;
+    background: linear-gradient(135deg, #22c55e 0%, #10b981 100%);
+    color: #fff;
+    padding: 12px 24px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.cft-btn:hover {
+    background: linear-gradient(135deg, #16a34a 0%, #059669 100%);
+    color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(34, 197, 94, 0.4);
+}
+
+/* Timeline */
+.cft-tracking-timeline {
+    margin-top: 30px;
+}
+
+.cft-tracking-timeline h3 {
+    margin: 0 0 15px 0;
+    font-size: 16px;
+    color: #1f2937;
+}
+
+.cft-tracking-timeline ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    border-left: 2px solid #e5e7eb;
+    padding-left: 20px;
+}
+
+.cft-tracking-timeline li {
+    position: relative;
+    padding-bottom: 20px;
+}
+
+.cft-tracking-timeline li::before {
+    content: '';
+    position: absolute;
+    left: -26px;
+    top: 5px;
+    width: 10px;
+    height: 10px;
+    background: #e5e7eb;
+    border-radius: 50%;
+}
+
+.cft-tracking-timeline li.active::before {
+    background: #22c55e;
+    box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.2);
+}
+
+.cft-tracking-timeline li .time {
+    display: block;
+    font-size: 12px;
+    color: #6b7280;
+    margin-bottom: 2px;
+}
+
+.cft-tracking-timeline li .desc {
+    display: block;
+    font-weight: 500;
+    color: #1f2937;
+}
+
+.cft-tracking-timeline li .loc {
+    display: block;
+    font-size: 13px;
+    color: #6b7280;
+    margin-top: 2px;
+}
+
+/* Tracking Page */
+.cft-tracking-page {
+    padding: 20px 0;
+}
+
+.cft-tracking-page h2 {
+    margin: 0 0 20px 0;
+}
+
+.cft-no-tracking {
+    padding: 40px;
+    text-align: center;
+    background: #f3f4f6;
+    border-radius: 8px;
+    color: #6b7280;
+}
+
+.cft-tracking-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.cft-tracking-item {
+    display: grid;
+    grid-template-columns: 1fr 2fr auto;
+    gap: 20px;
+    align-items: center;
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 15px 20px;
+}
+
+.cft-order-info .order-number {
+    display: block;
+    font-weight: 600;
+    color: #1f2937;
+}
+
+.cft-order-info .order-date {
+    display: block;
+    font-size: 12px;
+    color: #6b7280;
+}
+
+.cft-tracking-details .tracking-code {
+    margin-bottom: 5px;
+}
+
+.cft-tracking-details .tracking-code code {
+    background: #0a0a0a;
+    color: #00ff41;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+}
+
+.cft-tracking-details .tracking-status {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.cft-tracking-details .status-pending {
+    background: #fef3c7;
+    color: #92400e;
+}
+
+.cft-tracking-details .status-collected {
+    background: #cffafe;
+    color: #0e7490;
+}
+
+.cft-tracking-details .status-in_transit {
+    background: #e9d5ff;
+    color: #7c3aed;
+}
+
+.cft-tracking-details .status-out_for_delivery {
+    background: #dcfce7;
+    color: #166534;
+}
+
+.cft-tracking-details .status-delivered {
+    background: #bbf7d0;
+    color: #14532d;
+}
+
+.cft-tracking-details .status-failed {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+.cft-tracking-details .status-returned {
+    background: #fef3c7;
+    color: #92400e;
+}
+
+.cft-tracking-details .tracking-location {
+    font-size: 13px;
+    color: #6b7280;
+    margin-top: 5px;
+}
+
+.cft-tracking-actions {
+    display: flex;
+    gap: 8px;
+}
+
+/* Tracking Form (Shortcode) */
+.cft-tracking-form {
+    max-width: 500px;
+    margin: 20px auto;
+    padding: 30px;
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    text-align: center;
+}
+
+.cft-tracking-form h3 {
+    margin: 0 0 20px 0;
+}
+
+.cft-tracking-form form {
+    display: flex;
+    gap: 10px;
+}
+
+.cft-tracking-form .cft-input {
+    flex: 1;
+    padding: 12px 15px;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    font-size: 14px;
+}
+
+.cft-tracking-form .cft-input:focus {
+    outline: none;
+    border-color: #22c55e;
+    box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.1);
+}
+
+.cft-tracking-redirect {
+    margin-top: 20px;
+    padding: 15px;
+    background: #f0fdf4;
+    border-radius: 8px;
+    color: #166534;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .cft-tracking-item {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .cft-tracking-actions {
+        justify-content: flex-start;
+    }
+
+    .cft-tracking-form form {
+        flex-direction: column;
+    }
+}

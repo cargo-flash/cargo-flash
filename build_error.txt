@@ -1,0 +1,87 @@
+
+> cargo-flash@1.0.0 build
+> next build
+
+ ÔÜá Warning: Next.js inferred your workspace root, but it may not be correct.
+ We detected multiple lockfiles and selected the directory of C:\Users\PC GAMER\package-lock.json as the root directory.
+ To silence this warning, set `outputFileTracingRoot` in your Next.js config, or consider removing one of the lockfiles if it's not needed.
+   See https://nextjs.org/docs/app/api-reference/config/next-config-js/output#caveats for more information.
+ Detected additional lockfiles: 
+   * C:\Users\PC GAMER\Desktop\Cargo Flash\package-lock.json
+
+   Ôû▓ Next.js 15.5.9
+   - Environments: .env.local
+   - Experiments (use with caution):
+     ┬À serverActions
+
+   Creating an optimized production build ...
+ Ô£ô Compiled successfully in 4.5s
+   Skipping linting
+   Checking validity of types ...
+   Collecting page data ...
+   Generating static pages (0/42) ...
+   Generating static pages (10/42) 
+   Generating static pages (20/42) 
+   Generating static pages (31/42) 
+ Ô£ô Generating static pages (42/42)
+   Finalizing page optimization ...
+   Collecting build traces ...
+
+Route (app)                                  Size  First Load JS
+Ôöî Ôùï /                                       136 B         134 kB
+Ôö£ Ôùï /_not-found                             213 B         102 kB
+Ôö£ ãÆ /admin/analytics                      4.56 kB         125 kB
+Ôö£ ãÆ /admin/configuracoes                  4.87 kB         148 kB
+Ôö£ ãÆ /admin/dashboard                      8.08 kB         132 kB
+Ôö£ ãÆ /admin/entregas                       5.17 kB         170 kB
+Ôö£ ãÆ /admin/entregas/[id]                  13.9 kB         172 kB
+Ôö£ ãÆ /admin/entregas/nova                  6.24 kB         165 kB
+Ôö£ ãÆ /admin/logs                           3.47 kB         155 kB
+Ôö£ ãÆ /admin/simulacao                      6.48 kB         161 kB
+Ôö£ ãÆ /admin/usuarios                       3.74 kB         165 kB
+Ôö£ ãÆ /api/admin/api-keys                     213 B         102 kB
+Ôö£ ãÆ /api/admin/api-keys/[id]                213 B         102 kB
+Ôö£ ãÆ /api/admin/auth/change-password         213 B         102 kB
+Ôö£ ãÆ /api/admin/auth/forgot-password         213 B         102 kB
+Ôö£ ãÆ /api/admin/auth/login                   213 B         102 kB
+Ôö£ ãÆ /api/admin/auth/logout                  213 B         102 kB
+Ôö£ ãÆ /api/admin/auth/me                      213 B         102 kB
+Ôö£ ãÆ /api/admin/auth/reset-password          213 B         102 kB
+Ôö£ ãÆ /api/admin/dashboard                    213 B         102 kB
+Ôö£ ãÆ /api/admin/deliveries                   213 B         102 kB
+Ôö£ ãÆ /api/admin/deliveries/[id]              213 B         102 kB
+Ôö£ ãÆ /api/admin/deliveries/[id]/duplicate    213 B         102 kB
+Ôö£ ãÆ /api/admin/deliveries/[id]/status       213 B         102 kB
+Ôö£ ãÆ /api/admin/deliveries/bulk              213 B         102 kB
+Ôö£ ãÆ /api/admin/deliveries/export            213 B         102 kB
+Ôö£ ãÆ /api/admin/logs                         213 B         102 kB
+Ôö£ ãÆ /api/admin/notifications                213 B         102 kB
+Ôö£ ãÆ /api/admin/notifications/config         213 B         102 kB
+Ôö£ ãÆ /api/admin/notifications/test           213 B         102 kB
+Ôö£ ãÆ /api/admin/search                       213 B         102 kB
+Ôö£ ãÆ /api/admin/simulation/config            213 B         102 kB
+Ôö£ ãÆ /api/admin/users                        213 B         102 kB
+Ôö£ ãÆ /api/admin/users/[id]                   213 B         102 kB
+Ôö£ ãÆ /api/admin/webhook-logs                 213 B         102 kB
+Ôö£ ãÆ /api/contact                            213 B         102 kB
+Ôö£ ãÆ /api/cron/process-events                213 B         102 kB
+Ôö£ ãÆ /api/external/tracking                  213 B         102 kB
+Ôö£ ãÆ /api/health                             213 B         102 kB
+Ôö£ ãÆ /api/public/stats                       213 B         102 kB
+Ôö£ ãÆ /api/tracking/[code]                    213 B         102 kB
+Ôö£ ãÆ /api/webhooks/woocommerce               213 B         102 kB
+Ôö£ Ôùï /contato                              5.52 kB         136 kB
+Ôö£ Ôùï /forgot-password                      1.73 kB         135 kB
+Ôö£ Ôùï /login                                2.73 kB         133 kB
+Ôö£ ãÆ /rastrear/[code]                      55.4 kB         202 kB
+Ôö£ Ôùï /reset-password                       2.39 kB         136 kB
+Ôöö Ôùï /sobre                                  167 B         106 kB
++ First Load JS shared by all              102 kB
+  Ôö£ chunks/1255-8befde0980f5cba9.js       45.6 kB
+  Ôö£ chunks/4bd1b696-100b9d70ed4e49c1.js   54.2 kB
+  Ôöö other shared chunks (total)           2.07 kB
+
+
+Ôùï  (Static)   prerendered as static content
+ãÆ  (Dynamic)  server-rendered on demand
+

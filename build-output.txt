@@ -1,0 +1,73 @@
+
+> cargo-flash@1.0.0 build
+> next build
+
+ ÔÜá Warning: Next.js inferred your workspace root, but it may not be correct.
+ We detected multiple lockfiles and selected the directory of C:\Users\PC GAMER\package-lock.json as the root directory.
+ To silence this warning, set `outputFileTracingRoot` in your Next.js config, or consider removing one of the lockfiles if it's not needed.
+   See https://nextjs.org/docs/app/api-reference/config/next-config-js/output#caveats for more information.
+ Detected additional lockfiles: 
+   * C:\Users\PC GAMER\Desktop\Cargo Flash\package-lock.json
+
+   Ôû▓ Next.js 15.5.9
+   - Experiments (use with caution):
+     ┬À serverActions
+
+   Creating an optimized production build ...
+[Error: Cannot apply unknown utility class `border-border`]
+<w> [webpack.cache.PackFileCacheStrategy] Skipped not serializable cache item 'Compilation/modules|C:\Users\PC GAMER\Desktop\Cargo Flash\node_modules\next\dist\build\webpack\loaders\css-loader\src\index.js??ruleSet[1].rules[14].oneOf[10].use[2]!C:\Users\PC GAMER\Desktop\Cargo Flash\node_modules\next\dist\build\webpack\loaders\postcss-loader\src\index.js??ruleSet[1].rules[14].oneOf[10].use[3]!C:\Users\PC GAMER\Desktop\Cargo Flash\app\globals.css': No serializer registered for PostCSSSyntaxError
+<w> while serializing webpack/lib/cache/PackFileCacheStrategy.PackContentItems -> webpack/lib/NormalModule -> webpack/lib/ModuleBuildError -> PostCSSSyntaxError
+Failed to compile.
+
+./app/globals.css:1:1
+Syntax error: tailwindcss: C:\Users\PC GAMER\Desktop\Cargo Flash\app\globals.css Cannot apply unknown utility class `border-border`
+
+> 1 | @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+    | ^
+  2 | 
+  3 | @import "tailwindcss";
+
+./app/globals.css
+Syntax error: tailwindcss: C:\Users\PC GAMER\Desktop\Cargo Flash\app\globals.css Cannot apply unknown utility class `border-border` (1:1)
+
+> 1 | @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+    | ^
+  2 | 
+  3 | @import "tailwindcss";
+
+    at tryRunOrWebpackError (C:\Users\PC GAMER\Desktop\Cargo Flash\node_modules\next\dist\compiled\webpack\bundle5.js:29:316119)
+    at __webpack_require_module__ (C:\Users\PC GAMER\Desktop\Cargo Flash\node_modules\next\dist\compiled\webpack\bundle5.js:29:131532)
+    at __nested_webpack_require_161494__ (C:\Users\PC GAMER\Desktop\Cargo Flash\node_modules\next\dist\compiled\webpack\bundle5.js:29:130967)
+    at C:\Users\PC GAMER\Desktop\Cargo Flash\node_modules\next\dist\compiled\webpack\bundle5.js:29:131824
+    at symbolIterator (C:\Users\PC GAMER\Desktop\Cargo Flash\node_modules\next\dist\compiled\neo-async\async.js:1:14444)
+    at done (C:\Users\PC GAMER\Desktop\Cargo Flash\node_modules\next\dist\compiled\neo-async\async.js:1:14824)
+    at Hook.eval [as callAsync] (eval at create (C:\Users\PC GAMER\Desktop\Cargo Flash\node_modules\next\dist\compiled\webpack\bundle5.js:14:9224), <anonymous>:15:1)
+    at Hook.CALL_ASYNC_DELEGATE [as _callAsync] (C:\Users\PC GAMER\Desktop\Cargo Flash\node_modules\next\dist\compiled\webpack\bundle5.js:14:6378)
+    at C:\Users\PC GAMER\Desktop\Cargo Flash\node_modules\next\dist\compiled\webpack\bundle5.js:29:130687
+    at symbolIterator (C:\Users\PC GAMER\Desktop\Cargo Flash\node_modules\next\dist\compiled\neo-async\async.js:1:14402)
+-- inner error --
+Syntax error: tailwindcss: C:\Users\PC GAMER\Desktop\Cargo Flash\app\globals.css Cannot apply unknown utility class `border-border` (1:1)
+
+> 1 | @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+    | ^
+  2 | 
+  3 | @import "tailwindcss";
+
+    at Object.<anonymous> (C:\Users\PC GAMER\Desktop\Cargo Flash\node_modules\next\dist\build\webpack\loaders\css-loader\src\index.js??ruleSet[1].rules[14].oneOf[10].use[2]!C:\Users\PC GAMER\Desktop\Cargo Flash\node_modules\next\dist\build\webpack\loaders\postcss-loader\src\index.js??ruleSet[1].rules[14].oneOf[10].use[3]!C:\Users\PC GAMER\Desktop\Cargo Flash\app\globals.css:1:7)
+    at C:\Users\PC GAMER\Desktop\Cargo Flash\node_modules\next\dist\compiled\webpack\bundle5.js:29:962717
+    at Hook.eval [as call] (eval at create (C:\Users\PC GAMER\Desktop\Cargo Flash\node_modules\next\dist\compiled\webpack\bundle5.js:14:9002), <anonymous>:7:1)
+    at Hook.CALL_DELEGATE [as _call] (C:\Users\PC GAMER\Desktop\Cargo Flash\node_modules\next\dist\compiled\webpack\bundle5.js:14:6272)
+    at C:\Users\PC GAMER\Desktop\Cargo Flash\node_modules\next\dist\compiled\webpack\bundle5.js:29:131565
+    at tryRunOrWebpackError (C:\Users\PC GAMER\Desktop\Cargo Flash\node_modules\next\dist\compiled\webpack\bundle5.js:29:316073)
+    at __webpack_require_module__ (C:\Users\PC GAMER\Desktop\Cargo Flash\node_modules\next\dist\compiled\webpack\bundle5.js:29:131532)
+    at __nested_webpack_require_161494__ (C:\Users\PC GAMER\Desktop\Cargo Flash\node_modules\next\dist\compiled\webpack\bundle5.js:29:130967)
+    at C:\Users\PC GAMER\Desktop\Cargo Flash\node_modules\next\dist\compiled\webpack\bundle5.js:29:131824
+    at symbolIterator (C:\Users\PC GAMER\Desktop\Cargo Flash\node_modules\next\dist\compiled\neo-async\async.js:1:14444)
+
+Generated code for C:\Users\PC GAMER\Desktop\Cargo Flash\node_modules\next\dist\build\webpack\loaders\css-loader\src\index.js??ruleSet[1].rules[14].oneOf[10].use[2]!C:\Users\PC GAMER\Desktop\Cargo Flash\node_modules\next\dist\build\webpack\loaders\postcss-loader\src\index.js??ruleSet[1].rules[14].oneOf[10].use[3]!C:\Users\PC GAMER\Desktop\Cargo Flash\app\globals.css
+
+Import trace for requested module:
+./app/globals.css
+
+
+> Build failed because of webpack errors

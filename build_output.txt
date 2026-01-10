@@ -1,0 +1,359 @@
+
+> cargo-flash@1.0.0 build
+> next build
+
+ ÔÜá Warning: Next.js inferred your workspace root, but it may not be correct.
+ We detected multiple lockfiles and selected the directory of C:\Users\PC GAMER\package-lock.json as the root directory.
+ To silence this warning, set `outputFileTracingRoot` in your Next.js config, or consider removing one of the lockfiles if it's not needed.
+   See https://nextjs.org/docs/app/api-reference/config/next-config-js/output#caveats for more information.
+ Detected additional lockfiles: 
+   * C:\Users\PC GAMER\Desktop\Cargo Flash\package-lock.json
+
+   Ôû▓ Next.js 15.5.9
+   - Environments: .env.local
+   - Experiments (use with caution):
+     ┬À serverActions
+
+   Creating an optimized production build ...
+ Ô£ô Compiled successfully in 6.2s
+   Linting and checking validity of types ...
+
+Failed to compile.
+
+./app/admin/analytics/page.tsx
+9:5  Warning: 'Target' is defined but never used.  @typescript-eslint/no-unused-vars
+10:5  Warning: 'Zap' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./app/admin/configuracoes/page.tsx
+5:5  Warning: 'Settings' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./app/admin/dashboard/page.tsx
+13:5  Warning: 'Wifi' is defined but never used.  @typescript-eslint/no-unused-vars
+15:5  Warning: 'Lock' is defined but never used.  @typescript-eslint/no-unused-vars
+21:5  Warning: 'Users' is defined but never used.  @typescript-eslint/no-unused-vars
+23:5  Warning: 'ArrowRight' is defined but never used.  @typescript-eslint/no-unused-vars
+119:26  Warning: 'setSystemStatus' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+120:25  Warning: 'setThreatLevel' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+
+./app/admin/entregas/page.tsx
+12:5  Warning: 'Trash2' is defined but never used.  @typescript-eslint/no-unused-vars
+32:10  Warning: 'Badge' is defined but never used.  @typescript-eslint/no-unused-vars
+44:11  Warning: 'router' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+
+./app/admin/entregas/[id]/page.tsx
+11:5  Warning: 'User' is defined but never used.  @typescript-eslint/no-unused-vars
+13:5  Warning: 'Edit' is defined but never used.  @typescript-eslint/no-unused-vars
+18:5  Warning: 'Phone' is defined but never used.  @typescript-eslint/no-unused-vars
+19:5  Warning: 'Mail' is defined but never used.  @typescript-eslint/no-unused-vars
+20:5  Warning: 'Calendar' is defined but never used.  @typescript-eslint/no-unused-vars
+52:8  Warning: React Hook useEffect has a missing dependency: 'fetchDelivery'. Either include it or remove the dependency array.  react-hooks/exhaustive-deps
+
+./app/admin/logs/page.tsx
+90:8  Warning: React Hook useEffect has a missing dependency: 'fetchLogs'. Either include it or remove the dependency array.  react-hooks/exhaustive-deps
+97:8  Warning: React Hook useEffect has a missing dependency: 'fetchLogs'. Either include it or remove the dependency array.  react-hooks/exhaustive-deps
+
+./app/admin/simulacao/page.tsx
+5:5  Warning: 'Truck' is defined but never used.  @typescript-eslint/no-unused-vars
+7:5  Warning: 'Pause' is defined but never used.  @typescript-eslint/no-unused-vars
+13:5  Warning: 'RefreshCw' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./app/admin/usuarios/page.tsx
+7:5  Warning: 'Edit' is defined but never used.  @typescript-eslint/no-unused-vars
+13:5  Warning: 'Mail' is defined but never used.  @typescript-eslint/no-unused-vars
+14:5  Warning: 'Key' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./app/api/admin/deliveries/bulk/route.ts
+61:22  Warning: 'err' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./app/not-found.tsx
+2:19  Warning: 'Search' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./app/rastrear/[code]/page.tsx
+12:5  Warning: 'ChevronDown' is defined but never used.  @typescript-eslint/no-unused-vars
+18:10  Warning: 'Card' is defined but never used.  @typescript-eslint/no-unused-vars
+18:16  Warning: 'CardContent' is defined but never used.  @typescript-eslint/no-unused-vars
+18:29  Warning: 'CardHeader' is defined but never used.  @typescript-eslint/no-unused-vars
+18:41  Warning: 'CardTitle' is defined but never used.  @typescript-eslint/no-unused-vars
+19:10  Warning: 'Separator' is defined but never used.  @typescript-eslint/no-unused-vars
+64:10  Warning: 'DeliveryCountdown' is defined but never used.  @typescript-eslint/no-unused-vars
+69:10  Warning: 'AnimatedBackground' is defined but never used.  @typescript-eslint/no-unused-vars
+70:10  Warning: 'StatusCardPremium' is defined but never used.  @typescript-eslint/no-unused-vars
+75:10  Warning: 'QuickActionsBar' is defined but never used.  @typescript-eslint/no-unused-vars
+76:10  Warning: 'TrustSealsFooter' is defined but never used.  @typescript-eslint/no-unused-vars
+80:10  Warning: 'PulseIndicator' is defined but never used.  @typescript-eslint/no-unused-vars
+80:26  Warning: 'LiveStatusBar' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./components/tracking/ai-prediction-insights.tsx
+21:5  Warning: 'status' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./components/tracking/animated-background.tsx
+133:8  Warning: React Hook useEffect has a missing dependency: 'particleCounts'. Either include it or remove the dependency array.  react-hooks/exhaustive-deps
+
+./components/tracking/animated-route-path.tsx
+52:8  Warning: React Hook useEffect has a missing dependency: 'routePoints'. Either include it or remove the dependency array.  react-hooks/exhaustive-deps
+
+./components/tracking/animated-stats-display.tsx
+4:5  Warning: 'TrendingUp' is defined but never used.  @typescript-eslint/no-unused-vars
+5:5  Warning: 'Users' is defined but never used.  @typescript-eslint/no-unused-vars
+7:5  Warning: 'Clock' is defined but never used.  @typescript-eslint/no-unused-vars
+39:15  Warning: 'steps' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+62:8  Warning: React Hook useEffect has missing dependencies: 'targetValues.cities', 'targetValues.deliveries', 'targetValues.onTime', and 'targetValues.rating'. Either include them or remove the dependency array.  react-hooks/exhaustive-deps
+
+./components/tracking/animated-status-badge.tsx
+13:10  Warning: 'Badge' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./components/tracking/chat-bubble-button.tsx
+5:5  Warning: 'Phone' is defined but never used.  @typescript-eslint/no-unused-vars
+9:5  Warning: 'Sparkles' is defined but never used.  @typescript-eslint/no-unused-vars
+25:50  Warning: 'status' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./components/tracking/company-stats.tsx
+7:5  Warning: 'Truck' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./components/tracking/contact-options-card.tsx
+10:5  Warning: 'ExternalLink' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./components/tracking/countdown-card.tsx
+41:9  Error: 'textColor' is never reassigned. Use 'const' instead.  prefer-const
+42:9  Error: 'accentColor' is never reassigned. Use 'const' instead.  prefer-const
+
+./components/tracking/customer-rewards.tsx
+8:5  Warning: 'Heart' is defined but never used.  @typescript-eslint/no-unused-vars
+20:35  Warning: 'customerEmail' is defined but never used.  @typescript-eslint/no-unused-vars
+22:12  Warning: 'showConfetti' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+22:26  Warning: 'setShowConfetti' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+
+./components/tracking/delivery-alerts.tsx
+9:5  Warning: 'Bell' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./components/tracking/delivery-countdown.tsx
+3:10  Warning: 'Clock' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./components/tracking/delivery-guarantee-badge.tsx
+26:11  Warning: 'isFailed' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+
+./components/tracking/delivery-history-grid.tsx
+7:5  Warning: 'Clock' is defined but never used.  @typescript-eslint/no-unused-vars
+75:52  Warning: 'index' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./components/tracking/delivery-milestone.tsx
+28:45  Warning: 'createdAt' is defined but never used.  @typescript-eslint/no-unused-vars
+28:56  Warning: 'estimatedDelivery' is defined but never used.  @typescript-eslint/no-unused-vars
+103:8  Warning: React Hook useEffect has a missing dependency: 'milestones'. Either include it or remove the dependency array.  react-hooks/exhaustive-deps
+
+./components/tracking/delivery-photo-gallery.tsx
+7:5  Warning: 'Download' is defined but never used.  @typescript-eslint/no-unused-vars
+59:12  Warning: 'isFullscreen' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+59:26  Warning: 'setIsFullscreen' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+
+./components/tracking/delivery-progress-indicator.tsx
+109:49  Warning: 'index' is defined but never used.  @typescript-eslint/no-unused-vars
+133:31  Warning: 'StepIcon' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+
+./components/tracking/delivery-progress-ring.tsx
+4:5  Warning: 'Sparkles' is defined but never used.  @typescript-eslint/no-unused-vars
+7:5  Warning: 'Package' is defined but never used.  @typescript-eslint/no-unused-vars
+8:5  Warning: 'Star' is defined but never used.  @typescript-eslint/no-unused-vars
+9:5  Warning: 'Zap' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./components/tracking/delivery-ratings-summary.tsx
+9:5  Warning: 'Users' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./components/tracking/delivery-route-map.tsx
+274:8  Warning: React Hook useEffect has missing dependencies: 'currentLocation', 'destination.label', 'destination.lat', 'destination.lng', 'origin.label', 'origin.lat', 'origin.lng', 'status', and 'waypoints'. Either include them or remove the dependency array.  react-hooks/exhaustive-deps
+
+./components/tracking/delivery-signature-pad.tsx
+21:26  Warning: 'setHasSignature' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+22:11  Warning: 'canvasRef' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+
+./components/tracking/delivery-speed-meter.tsx
+8:5  Warning: 'Truck' is defined but never used.  @typescript-eslint/no-unused-vars
+9:5  Warning: 'Package' is defined but never used.  @typescript-eslint/no-unused-vars
+121:58  Warning: 'i' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./components/tracking/delivery-time-slot-picker.tsx
+4:5  Warning: 'Clock' is defined but never used.  @typescript-eslint/no-unused-vars
+26:42  Warning: 'trackingCode' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./components/tracking/driver-info-card.tsx
+5:5  Warning: 'User' is defined but never used.  @typescript-eslint/no-unused-vars
+10:5  Warning: 'Clock' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./components/tracking/estimated-arrival-card.tsx
+10:5  Warning: 'CheckCircle2' is defined but never used.  @typescript-eslint/no-unused-vars
+51:11  Warning: 'TimeIcon' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+
+./components/tracking/eta-countdown-premium.tsx
+4:5  Warning: 'Clock' is defined but never used.  @typescript-eslint/no-unused-vars
+6:5  Warning: 'Sparkles' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./components/tracking/event-timeline.tsx
+60:27  Warning: 'isLast' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+
+./components/tracking/feedback-card.tsx
+8:5  Warning: 'MessageCircle' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./components/tracking/floating-actions.tsx
+10:5  Warning: 'ChevronUp' is defined but never used.  @typescript-eslint/no-unused-vars
+12:5  Warning: 'RefreshCw' is defined but never used.  @typescript-eslint/no-unused-vars
+23:49  Warning: 'status' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./components/tracking/immersive-hero.tsx
+5:5  Warning: 'CheckCircle2' is defined but never used.  @typescript-eslint/no-unused-vars
+6:5  Warning: 'Truck' is defined but never used.  @typescript-eslint/no-unused-vars
+12:5  Warning: 'Zap' is defined but never used.  @typescript-eslint/no-unused-vars
+109:10  Warning: 'AnimatedCube' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./components/tracking/insurance-info-card.tsx
+7:5  Warning: 'DollarSign' is defined but never used.  @typescript-eslint/no-unused-vars
+31:11  Warning: 'premiumPercentage' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+
+./components/tracking/interactive-map-preview.tsx
+4:5  Warning: 'Truck' is defined but never used.  @typescript-eslint/no-unused-vars
+5:5  Warning: 'Package' is defined but never used.  @typescript-eslint/no-unused-vars
+6:5  Warning: 'MapPin' is defined but never used.  @typescript-eslint/no-unused-vars
+7:5  Warning: 'Navigation' is defined but never used.  @typescript-eslint/no-unused-vars
+8:5  Warning: 'Wind' is defined but never used.  @typescript-eslint/no-unused-vars
+25:5  Warning: 'status' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+30:12  Warning: 'isAnimating' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+30:25  Warning: 'setIsAnimating' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+68:11  Warning: 'landmarks' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+
+./components/tracking/journey-visualizer.tsx
+9:5  Warning: 'ArrowRight' is defined but never used.  @typescript-eslint/no-unused-vars
+22:7  Warning: 'journeySteps' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+
+./components/tracking/live-location-compass.tsx
+5:5  Warning: 'Navigation' is defined but never used.  @typescript-eslint/no-unused-vars
+6:5  Warning: 'MapPin' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./components/tracking/live-location-tracker.tsx
+20:77  Warning: 'estimatedArrival' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./components/tracking/live-notification-toast.tsx
+4:5  Warning: 'Bell' is defined but never used.  @typescript-eslint/no-unused-vars
+26:49  Warning: 'trackingCode' is defined but never used.  @typescript-eslint/no-unused-vars
+48:8  Warning: React Hook useEffect has a missing dependency: 'addToast'. Either include it or remove the dependency array.  react-hooks/exhaustive-deps
+
+./components/tracking/logistics-info-card.tsx
+4:5  Warning: 'Building2' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./components/tracking/mobile-app-promotion.tsx
+9:5  Warning: 'Download' is defined but never used.  @typescript-eslint/no-unused-vars
+13:10  Warning: 'Button' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./components/tracking/monitoring-status.tsx
+21:36  Warning: 'trackingCode' is defined but never used.  @typescript-eslint/no-unused-vars
+21:50  Warning: 'lastUpdate' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./components/tracking/notification-center.tsx
+29:38  Warning: 'trackingCode' is defined but never used.  @typescript-eslint/no-unused-vars
+92:79  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+
+./components/tracking/package-details-premium.tsx
+8:5  Warning: 'Box' is defined but never used.  @typescript-eslint/no-unused-vars
+10:5  Warning: 'FileText' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./components/tracking/premium-progress-steps.tsx
+8:5  Warning: 'Clock' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./components/tracking/premium-ratings-card.tsx
+5:5  Warning: 'TrendingUp' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./components/tracking/premium-support-hero.tsx
+21:52  Warning: 'status' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./components/tracking/premium-timeline.tsx
+12:5  Warning: 'User' is defined but never used.  @typescript-eslint/no-unused-vars
+45:44  Warning: 'status' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./components/tracking/promotional-banner.tsx
+7:5  Warning: 'Calendar' is defined but never used.  @typescript-eslint/no-unused-vars
+8:5  Warning: 'Percent' is defined but never used.  @typescript-eslint/no-unused-vars
+19:37  Warning: 'customerEmail' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./components/tracking/proof-of-delivery-card.tsx
+13:29  Warning: 'CardHeader' is defined but never used.  @typescript-eslint/no-unused-vars
+13:41  Warning: 'CardTitle' is defined but never used.  @typescript-eslint/no-unused-vars
+113:33  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+147:33  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+171:21  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+./components/tracking/pulse-indicator.tsx
+4:5  Warning: 'Package' is defined but never used.  @typescript-eslint/no-unused-vars
+5:5  Warning: 'MapPin' is defined but never used.  @typescript-eslint/no-unused-vars
+7:5  Warning: 'Truck' is defined but never used.  @typescript-eslint/no-unused-vars
+8:5  Warning: 'CheckCircle2' is defined but never used.  @typescript-eslint/no-unused-vars
+9:5  Warning: 'Sparkles' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./components/tracking/quick-actions-bar.tsx
+7:5  Warning: 'Camera' is defined but never used.  @typescript-eslint/no-unused-vars
+20:49  Warning: 'status' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./components/tracking/reschedule-card.tsx
+6:5  Warning: 'Phone' is defined but never used.  @typescript-eslint/no-unused-vars
+7:5  Warning: 'Home' is defined but never used.  @typescript-eslint/no-unused-vars
+8:5  Warning: 'Building2' is defined but never used.  @typescript-eslint/no-unused-vars
+9:5  Warning: 'Clock' is defined but never used.  @typescript-eslint/no-unused-vars
+11:5  Warning: 'X' is defined but never used.  @typescript-eslint/no-unused-vars
+29:34  Warning: 'trackingCode' is defined but never used.  @typescript-eslint/no-unused-vars
+43:13  Error: 'current' is never reassigned. Use 'const' instead.  prefer-const
+
+./components/tracking/satisfaction-survey.tsx
+7:5  Warning: 'ThumbsUp' is defined but never used.  @typescript-eslint/no-unused-vars
+8:5  Warning: 'ThumbsDown' is defined but never used.  @typescript-eslint/no-unused-vars
+30:38  Warning: 'trackingCode' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./components/tracking/security-badges.tsx
+6:5  Warning: 'CheckCircle2' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./components/tracking/sender-card.tsx
+8:5  Warning: 'Globe' is defined but never used.  @typescript-eslint/no-unused-vars
+9:5  Warning: 'ExternalLink' is defined but never used.  @typescript-eslint/no-unused-vars
+13:10  Warning: 'Button' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./components/tracking/share-card.tsx
+11:5  Warning: 'QrCode' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./components/tracking/smart-prediction-card.tsx
+7:5  Warning: 'Calendar' is defined but never used.  @typescript-eslint/no-unused-vars
+79:77  Warning: 'originState' is defined but never used.  @typescript-eslint/no-unused-vars
+79:90  Warning: 'destinationState' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./components/tracking/social-share-card.tsx
+21:49  Warning: 'status' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./components/tracking/special-handling-card.tsx
+7:5  Warning: 'FlaskConical' is defined but never used.  @typescript-eslint/no-unused-vars
+9:5  Warning: 'Skull' is defined but never used.  @typescript-eslint/no-unused-vars
+12:10  Warning: 'Badge' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./components/tracking/status-hero.tsx
+170:11  Warning: 'isFailed' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+
+./components/tracking/status-timeline-vertical.tsx
+9:5  Warning: 'AlertCircle' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./components/tracking/sustainability-card.tsx
+18:56  Warning: 'vehicleType' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+
+./components/tracking/testimonial-slider.tsx
+69:37  Warning: 'routeInfo' is defined but never used.  @typescript-eslint/no-unused-vars
+129:25  Error: `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`.  react/no-unescaped-entities
+129:51  Error: `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`.  react/no-unescaped-entities
+
+./components/tracking/trust-banner.tsx
+20:31  Warning: 'trackingCode' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./components/tracking/weather-delivery-impact.tsx
+8:5  Warning: 'Thermometer' is defined but never used.  @typescript-eslint/no-unused-vars
+43:72  Warning: 'estimatedDelivery' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./lib/brazilian-routes.ts
+152:9  Error: 'hubNames' is never reassigned. Use 'const' instead.  prefer-const
+
+./lib/simulation-engine.ts
+7:10  Warning: 'BrazilianCity' is defined but never used.  @typescript-eslint/no-unused-vars
+9:33  Warning: 'ScheduledEvent' is defined but never used.  @typescript-eslint/no-unused-vars
+
+info  - Need to disable some ESLint rules? Learn more here: https://nextjs.org/docs/app/api-reference/config/eslint#disabling-rules
