@@ -314,6 +314,7 @@ function parseCityString(cityStr: string): { name: string; state: string } {
 /**
  * Generate intermediate waypoints between origin and destination
  * Following real highway routes when available
+ * FIXED: Now finds nearest highway entry/exit points instead of requiring exact match
  */
 export function generateRouteWaypoints(
     originCity: string,
@@ -364,60 +365,96 @@ export function generateRouteWaypoints(
     })
 
     if (highwayRoute.length > 0) {
-        // Follow highway route
-        let prevCity = origin
-        let foundOrigin = false
-        let reachedDest = false
+        // Parse all highway cities with their coordinates
+        const highwayCities: Array<{ name: string; state: string; data: BrazilianCity | undefined; index: number }> = []
 
-        for (const cityStr of highwayRoute) {
-            const { name, state } = parseCityString(cityStr)
-
-            // Skip until we find origin city
-            if (!foundOrigin) {
-                if (name.toLowerCase() === originCity.toLowerCase() && state === originState) {
-                    foundOrigin = true
-                }
-                continue
-            }
-
-            // Stop if we've passed destination
-            if (reachedDest) break
-
+        for (let i = 0; i < highwayRoute.length; i++) {
+            const { name, state } = parseCityString(highwayRoute[i])
             const cityData = findCityExpanded(name, state)
-            if (!cityData) continue
+            highwayCities.push({ name, state, data: cityData, index: i })
+        }
+
+        // Find the ENTRY point: nearest highway city to origin
+        let entryIndex = 0
+        let minDistToOrigin = Infinity
+
+        for (const hc of highwayCities) {
+            if (hc.data) {
+                const dist = calculateDistance(origin, hc.data)
+                if (dist < minDistToOrigin) {
+                    minDistToOrigin = dist
+                    entryIndex = hc.index
+                }
+            }
+        }
+
+        // Find the EXIT point: nearest highway city to destination
+        let exitIndex = highwayCities.length - 1
+        let minDistToDest = Infinity
+
+        for (const hc of highwayCities) {
+            if (hc.data) {
+                const dist = calculateDistance(hc.data, destination)
+                if (dist < minDistToDest) {
+                    minDistToDest = dist
+                    exitIndex = hc.index
+                }
+            }
+        }
+
+        // Ensure correct order (entry before exit)
+        if (entryIndex > exitIndex) {
+            // Route is reversed - swap and iterate backwards
+            [entryIndex, exitIndex] = [exitIndex, entryIndex]
+        }
+
+        console.log(`Highway route: entry at index ${entryIndex} (${highwayCities[entryIndex]?.name}), exit at index ${exitIndex} (${highwayCities[exitIndex]?.name})`)
+
+        // Follow highway from entry point to exit point
+        let prevCity: BrazilianCity = origin
+        const usedCities = new Set<string>([origin.name])
+
+        for (let i = entryIndex; i <= exitIndex; i++) {
+            const hc = highwayCities[i]
+            if (!hc.data) continue
+
+            // Skip if already used (avoid duplicates)
+            if (usedCities.has(hc.name)) continue
+            usedCities.add(hc.name)
 
             // Calculate distance from previous waypoint
-            const segmentDistance = calculateDistance(prevCity, cityData)
+            const segmentDistance = calculateDistance(prevCity, hc.data)
             currentDistance += segmentDistance
 
-            // Check if this is close to destination
-            const distToDestination = calculateDistance(cityData, destination)
-            if (distToDestination < 50) {
-                reachedDest = true
-            }
+            // Check if this is close to or past destination
+            const distToDestination = calculateDistance(hc.data, destination)
 
-            // Only add if we haven't passed the destination
-            if (currentDistance <= totalDistance * 1.1) {
+            // Only add if we haven't significantly passed the destination
+            if (currentDistance <= totalDistance * 1.2) {
                 waypoints.push({
-                    city: cityData.name,
-                    state: cityData.state,
-                    lat: cityData.lat,
-                    lng: cityData.lng,
+                    city: hc.data.name,
+                    state: hc.data.state,
+                    lat: hc.data.lat,
+                    lng: hc.data.lng,
                     distanceFromOrigin: currentDistance,
                     cumulativeProgress: Math.min((currentDistance / totalDistance) * 100, 95),
                     estimatedArrival: new Date(), // Will be calculated later
-                    stopType: cityData.isHub ? 'hub' : 'transit',
-                    description: cityData.isHub
-                        ? `Centro de Distribuição ${cityData.name}`
-                        : `Em trânsito - ${cityData.name}`
+                    stopType: hc.data.isHub ? 'hub' : 'transit',
+                    description: hc.data.isHub
+                        ? `Centro de Distribuição ${hc.data.name}`
+                        : `Em trânsito - ${hc.data.name}`
                 })
 
-                prevCity = cityData
+                prevCity = hc.data
             }
+
+            // Stop if we're very close to destination
+            if (distToDestination < 30) break
         }
     } else {
         // No highway route - generate intermediate points along straight line
         const numIntermediatePoints = Math.min(Math.floor(totalDistance / 150), 10)
+        const usedCityNames = new Set<string>([origin.name])
 
         for (let i = 1; i <= numIntermediatePoints; i++) {
             const progress = i / (numIntermediatePoints + 1)
@@ -427,7 +464,8 @@ export function generateRouteWaypoints(
             // Find nearest city to this point
             const nearestCity = findNearestCity(lat, lng)
 
-            if (nearestCity && !waypoints.some(w => w.city === nearestCity.name)) {
+            if (nearestCity && !usedCityNames.has(nearestCity.name)) {
+                usedCityNames.add(nearestCity.name)
                 currentDistance = totalDistance * progress
 
                 waypoints.push({
@@ -447,18 +485,23 @@ export function generateRouteWaypoints(
         }
     }
 
-    // Add destination
-    waypoints.push({
-        city: destination.name,
-        state: destination.state,
-        lat: destination.lat,
-        lng: destination.lng,
-        distanceFromOrigin: totalDistance,
-        cumulativeProgress: 100,
-        estimatedArrival: new Date(),
-        stopType: 'destination',
-        description: `${destCity}, ${destState}`
-    })
+    // Add destination (if not already the last waypoint)
+    const lastWaypoint = waypoints[waypoints.length - 1]
+    if (lastWaypoint.city !== destination.name || lastWaypoint.state !== destination.state) {
+        waypoints.push({
+            city: destination.name,
+            state: destination.state,
+            lat: destination.lat,
+            lng: destination.lng,
+            distanceFromOrigin: totalDistance,
+            cumulativeProgress: 100,
+            estimatedArrival: new Date(),
+            stopType: 'destination',
+            description: `${destCity}, ${destState}`
+        })
+    }
+
+    console.log(`Generated ${waypoints.length} waypoints for route ${originCity}/${originState} -> ${destCity}/${destState}`)
 
     return waypoints
 }
