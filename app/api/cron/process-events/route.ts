@@ -68,6 +68,24 @@ export async function POST(request: Request) {
                     if (event.new_status === 'delivered') {
                         updateData.delivered_at = now
                     }
+
+                    // Send WhatsApp notification for key status changes
+                    if (['collected', 'out_for_delivery', 'delivered'].includes(event.new_status)) {
+                        // Get delivery details for notification
+                        const { data: delivery } = await supabase
+                            .from('deliveries')
+                            .select('id, tracking_code, status, recipient_name, recipient_phone, current_location, estimated_delivery')
+                            .eq('id', event.delivery_id)
+                            .single()
+
+                        if (delivery?.recipient_phone) {
+                            // Import dynamically to avoid circular dependencies
+                            const { sendDeliveryNotification } = await import('@/lib/notification-trigger')
+                            sendDeliveryNotification(delivery, event.new_status).catch(err =>
+                                console.error('WhatsApp notification error:', err)
+                            )
+                        }
+                    }
                 }
 
                 await supabase
