@@ -18,6 +18,7 @@ class CFT_Settings {
         add_action('admin_menu', array(__CLASS__, 'add_menu'));
         add_action('admin_init', array(__CLASS__, 'register_settings'));
         add_action('wp_ajax_cft_test_connection', array(__CLASS__, 'ajax_test_connection'));
+        add_action('wp_ajax_cft_bulk_import', array(__CLASS__, 'ajax_bulk_import'));
     }
 
     /**
@@ -281,6 +282,50 @@ class CFT_Settings {
                 <?php submit_button('Salvar Configurações', 'primary', 'submit', true, array('id' => 'cft-save-settings')); ?>
             </form>
 
+            <!-- Bulk Import Section -->
+            <div class="cft-settings-section cft-import-section">
+                <h2>🚀 Importar Pedidos</h2>
+                <p>Envie todos os pedidos pendentes para o Cargo Flash com apenas um clique.</p>
+                
+                <?php
+                // Count orders ready to import
+                $args = array(
+                    'status' => array('processing', 'on-hold'),
+                    'limit' => -1,
+                    'return' => 'ids',
+                );
+                $orders = wc_get_orders($args);
+                $pending_count = 0;
+                
+                foreach ($orders as $order_id) {
+                    $tracking = CFT_API::get_tracking_by_order($order_id);
+                    if (!$tracking || empty($tracking->tracking_code)) {
+                        $pending_count++;
+                    }
+                }
+                ?>
+                
+                <div class="cft-import-box">
+                    <div class="cft-import-count">
+                        <span class="count-number"><?php echo intval($pending_count); ?></span>
+                        <span class="count-label">pedidos aguardando importação</span>
+                    </div>
+                    
+                    <button type="button" class="button button-primary button-hero" id="cft-bulk-import" <?php echo $pending_count === 0 ? 'disabled' : ''; ?>>
+                        📦 Importar Todos os Pedidos
+                    </button>
+                    
+                    <div id="cft-import-progress" style="display: none;">
+                        <div class="cft-progress-bar">
+                            <div class="cft-progress-fill"></div>
+                        </div>
+                        <p class="cft-progress-text">Importando pedidos...</p>
+                    </div>
+                    
+                    <div id="cft-import-result" style="display: none;"></div>
+                </div>
+            </div>
+
             <!-- Statistics -->
             <div class="cft-settings-section cft-stats-section">
                 <h2>📊 Estatísticas</h2>
@@ -325,6 +370,82 @@ class CFT_Settings {
                 alert('URL copiado!');
             });
         }
+        
+        // Bulk import functionality
+        jQuery(document).ready(function($) {
+            $('#cft-bulk-import').on('click', function() {
+                var $btn = $(this);
+                var $progress = $('#cft-import-progress');
+                var $result = $('#cft-import-result');
+                
+                if (!confirm('Deseja importar todos os pedidos pendentes para o Cargo Flash?')) {
+                    return;
+                }
+                
+                $btn.prop('disabled', true).text('Importando...');
+                $progress.show();
+                $result.hide();
+                
+                $.ajax({
+                    url: ajaxurl,
+                    type: 'POST',
+                    data: {
+                        action: 'cft_bulk_import',
+                        nonce: '<?php echo wp_create_nonce('cft_nonce'); ?>'
+                    },
+                    success: function(response) {
+                        $progress.hide();
+                        $result.show();
+                        
+                        if (response.success) {
+                            $result.html('<div class="notice notice-success"><p>✅ ' + response.data.message + '</p></div>');
+                            if (response.data.sent > 0) {
+                                setTimeout(function() { location.reload(); }, 2000);
+                            }
+                        } else {
+                            $result.html('<div class="notice notice-error"><p>❌ Erro: ' + response.data + '</p></div>');
+                        }
+                        
+                        $btn.prop('disabled', false).text('📦 Importar Todos os Pedidos');
+                    },
+                    error: function() {
+                        $progress.hide();
+                        $result.show().html('<div class="notice notice-error"><p>❌ Erro de conexão</p></div>');
+                        $btn.prop('disabled', false).text('📦 Importar Todos os Pedidos');
+                    }
+                });
+            });
+            
+            // Test connection button
+            $('#cft-test-connection').on('click', function() {
+                var $btn = $(this);
+                var $result = $('#cft-connection-result');
+                
+                $btn.prop('disabled', true);
+                $result.text('Testando...');
+                
+                $.ajax({
+                    url: ajaxurl,
+                    type: 'POST',
+                    data: {
+                        action: 'cft_test_connection',
+                        nonce: '<?php echo wp_create_nonce('cft_nonce'); ?>'
+                    },
+                    success: function(response) {
+                        if (response.success) {
+                            $result.html('<span style="color: green;">✅ ' + response.data + '</span>');
+                        } else {
+                            $result.html('<span style="color: red;">❌ ' + response.data + '</span>');
+                        }
+                        $btn.prop('disabled', false);
+                    },
+                    error: function() {
+                        $result.html('<span style="color: red;">❌ Erro de conexão</span>');
+                        $btn.prop('disabled', false);
+                    }
+                });
+            });
+        });
         </script>
         <?php
     }
@@ -364,5 +485,53 @@ class CFT_Settings {
         } else {
             wp_send_json_error('Erro na API (código ' . $code . ')');
         }
+    }
+
+    /**
+     * AJAX bulk import orders
+     */
+    public static function ajax_bulk_import() {
+        check_ajax_referer('cft_nonce', 'nonce');
+
+        if (!current_user_can('manage_woocommerce')) {
+            wp_send_json_error('Permissão negada');
+        }
+
+        // Get orders to import
+        $args = array(
+            'status' => array('processing', 'on-hold'),
+            'limit' => -1,
+            'return' => 'ids',
+        );
+        $orders = wc_get_orders($args);
+        
+        $sent = 0;
+        $failed = 0;
+        $errors = array();
+
+        foreach ($orders as $order_id) {
+            // Check if already sent
+            $tracking = CFT_API::get_tracking_by_order($order_id);
+            if ($tracking && !empty($tracking->tracking_code)) {
+                continue; // Already imported
+            }
+
+            // Send to Cargo Flash
+            $result = CFT_Order_Handler::send_order_to_cargo_flash($order_id);
+            
+            if (is_wp_error($result)) {
+                $failed++;
+                $errors[] = sprintf('Pedido #%d: %s', $order_id, $result->get_error_message());
+            } else {
+                $sent++;
+            }
+        }
+
+        wp_send_json_success(array(
+            'sent' => $sent,
+            'failed' => $failed,
+            'errors' => $errors,
+            'message' => sprintf('%d pedidos importados com sucesso!', $sent) . ($failed > 0 ? sprintf(' (%d falharam)', $failed) : ''),
+        ));
     }
 }

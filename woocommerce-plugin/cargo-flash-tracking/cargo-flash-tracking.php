@@ -32,8 +32,9 @@ define('CFT_PLUGIN_BASENAME', plugin_basename(__FILE__));
  * Required for WooCommerce 8.0+ High-Performance Order Storage
  */
 add_action('before_woocommerce_init', function() {
-    if (class_exists(\Automattic\WooCommerce\Utilities\FeaturesUtil::class)) {
+    if (class_exists('\Automattic\WooCommerce\Utilities\FeaturesUtil')) {
         \Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility('custom_order_tables', __FILE__, true);
+        \Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility('cart_checkout_blocks', __FILE__, true);
     }
 });
 

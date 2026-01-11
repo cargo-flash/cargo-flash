@@ -206,3 +206,87 @@
         grid-template-columns: repeat(2, 1fr);
     }
 }
+
+/* Import Section */
+.cft-import-section {
+    background: linear-gradient(135deg, #1e3a5f 0%, #0a1628 100%);
+    border-color: #0052cc;
+}
+
+.cft-import-section h2 {
+    color: #fff;
+    border-color: #0052cc;
+}
+
+.cft-import-section p {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.cft-import-box {
+    text-align: center;
+    padding: 20px;
+}
+
+.cft-import-count {
+    margin-bottom: 20px;
+}
+
+.cft-import-count .count-number {
+    display: block;
+    font-size: 48px;
+    font-weight: bold;
+    color: #0052cc;
+    line-height: 1;
+}
+
+.cft-import-count .count-label {
+    display: block;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.6);
+    margin-top: 8px;
+}
+
+.cft-import-box .button-hero {
+    font-size: 16px !important;
+    padding: 12px 30px !important;
+    height: auto !important;
+}
+
+.cft-progress-bar {
+    width: 100%;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    overflow: hidden;
+    margin: 15px 0;
+}
+
+.cft-progress-fill {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, #0052cc, #00ff41);
+    animation: progress-animation 1.5s infinite;
+}
+
+@keyframes progress-animation {
+    0% {
+        transform: translateX(-100%);
+    }
+
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+.cft-progress-text {
+    color: rgba(255, 255, 255, 0.7);
+    margin: 0;
+}
+
+#cft-import-result {
+    margin-top: 15px;
+}
+
+#cft-import-result .notice {
+    margin: 0;
+}

@@ -150,23 +150,32 @@ export const createApiKeySchema = z.object({
 export const wooCommerceWebhookSchema = z.object({
     order_id: z.coerce.number(),
     customer: z.object({
-        name: z.string(),
-        email: z.string().email().optional(),
-        phone: z.string().optional(),
+        name: z.string().default('Cliente'),
+        email: z.string().email().optional().or(z.literal('')),
+        phone: z.string().optional().or(z.literal('')),
         address: z.object({
-            street: z.string(),
-            complement: z.string().optional(),
-            city: z.string(),
-            state: z.string(),
-            zip: z.string(),
-        }),
+            street: z.string().optional().default(''),
+            complement: z.string().optional().default(''),
+            city: z.string().optional().default(''),
+            state: z.string().optional().default('SP'),
+            zip: z.string().optional().default(''),
+        }).default({}),
     }),
     items: z.array(z.object({
         name: z.string(),
-        quantity: z.number(),
-        price: z.number(),
-    })).optional(),
-    total: z.number().optional(),
+        quantity: z.coerce.number().default(1),
+        price: z.coerce.number().optional(),
+        sku: z.string().optional(),
+    })).optional().default([]),
+    total: z.coerce.number().optional(),
+    notes: z.string().optional(),
+    origin: z.object({
+        company: z.string().optional(),
+        address: z.string().optional(),
+        city: z.string().optional(),
+        state: z.string().optional(),
+        zip: z.string().optional(),
+    }).optional(),
 })
 
 // ============================================
