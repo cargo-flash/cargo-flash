@@ -66,7 +66,7 @@ export async function POST(request: Request) {
             )
         }
 
-        const { order_id, customer, items } = validation.data
+        const { order_id, customer, items, total } = validation.data
 
         // Get simulation config
         const { data: config } = await supabase
@@ -112,6 +112,7 @@ export async function POST(request: Request) {
                 package_description: packageDescription,
                 estimated_delivery: format(estimatedDelivery, 'yyyy-MM-dd'),
                 current_location: `${config?.origin_city || 'São Paulo'}, ${config?.origin_state || 'SP'}`,
+                insurance_value: total || 0,
             })
             .select()
             .single()
