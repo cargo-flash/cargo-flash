@@ -24,12 +24,17 @@ export const metadata: Metadata = {
     keywords: ['rastreamento', 'entregas', 'transporte', 'logística', 'tracking'],
     authors: [{ name: 'Cargo Flash' }],
     creator: 'Cargo Flash',
+    icons: {
+        icon: '/favicon.png',
+        apple: '/logo.png',
+    },
     openGraph: {
         type: 'website',
         locale: 'pt_BR',
         siteName: 'Cargo Flash',
         title: 'Cargo Flash - Rastreamento de Entregas',
         description: 'Rastreie suas entregas em tempo real com o Cargo Flash.',
+        images: ['/logo.png'],
     },
     robots: {
         index: true,
