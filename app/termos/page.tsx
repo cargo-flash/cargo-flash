@@ -174,7 +174,6 @@ export default function TermosPage() {
                             <ul>
                                 <li>Email: contato@cargoflash.com.br</li>
                                 <li>Telefone: (11) 3000-0000</li>
-                                <li>Endereço: Av. Eng. Luís Carlos Berrini, 1500 - Brooklin, São Paulo - SP</li>
                             </ul>
                         </div>
                     </div>

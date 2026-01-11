@@ -64,13 +64,7 @@ export default function SobrePage() {
                             <Link href="/contato" className="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors">Contato</Link>
                         </nav>
 
-                        <div className="flex items-center gap-3">
-                            <Link href="/login">
-                                <Button variant="outline" className="hidden md:flex border-gray-300 text-gray-700 hover:bg-gray-50 h-10">
-                                    Área do Cliente
-                                </Button>
-                            </Link>
-                        </div>
+
                     </div>
                 </div>
             </header>

@@ -31,7 +31,7 @@ import { ConfidenceMeters } from '@/components/tracking/confidence-meters'
 import { TrackingQRCode } from '@/components/tracking/tracking-qr-code'
 import { ConfettiCelebration } from '@/components/tracking/confetti-celebration'
 import { DeliveryRouteMap } from '@/components/tracking/delivery-route-map'
-import { PackageInfoCard } from '@/components/tracking/package-info-card'
+
 import { LogisticsInfoCard } from '@/components/tracking/logistics-info-card'
 import { SupportCard } from '@/components/tracking/support-card'
 import { RecipientCard } from '@/components/tracking/recipient-card'
@@ -415,8 +415,6 @@ export default async function PremiumTrackingPage({ params }: PageProps) {
                         {/* Recipient Card */}
                         <RecipientCard delivery={delivery as Delivery} />
 
-                        {/* Package Info */}
-                        <PackageInfoCard delivery={delivery as Delivery} />
 
 
                         {/* Support Card */}

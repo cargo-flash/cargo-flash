@@ -206,7 +206,6 @@ export default function PrivacidadePage() {
                             <ul>
                                 <li>Email: privacidade@cargoflash.com.br</li>
                                 <li>Telefone: (11) 3000-0000</li>
-                                <li>Endereço: Av. Eng. Luís Carlos Berrini, 1500 - Brooklin, São Paulo - SP, CEP 04571-000</li>
                             </ul>
 
                             <h2>12. Autoridade Nacional de Proteção de Dados</h2>

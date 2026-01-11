@@ -97,13 +97,7 @@ export default function ContatoPage() {
                             <Link href="/contato" className="text-sm font-semibold text-[#0052cc]">Contato</Link>
                         </nav>
 
-                        <div className="flex items-center gap-3">
-                            <Link href="/login">
-                                <Button variant="outline" className="hidden md:flex border-gray-300 text-gray-700 hover:bg-gray-50 h-10">
-                                    Área do Cliente
-                                </Button>
-                            </Link>
-                        </div>
+
                     </div>
                 </div>
             </header>
@@ -149,11 +143,7 @@ export default function ContatoPage() {
                                     content: '(11) 99999-9999',
                                     action: 'https://wa.me/5511999999999',
                                 },
-                                {
-                                    icon: MapPin,
-                                    title: 'Endereço',
-                                    content: 'Av. Eng. Luís Carlos Berrini, 1500\nBrooklin, São Paulo - SP\nCEP: 04571-000',
-                                },
+
                             ].map((item, i) => (
                                 <div key={i} className="bg-white rounded-xl border border-gray-200 p-4 flex items-start gap-4">
                                     <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-[#0052cc]/10 text-[#0052cc] shrink-0">

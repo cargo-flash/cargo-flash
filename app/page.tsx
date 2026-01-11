@@ -81,19 +81,7 @@ export default function HomePage() {
                             <Link href="/contato" className="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors">Contato</Link>
                         </nav>
 
-                        <div className="flex items-center gap-3">
-                            <Link href="/login">
-                                <Button variant="outline" className="hidden md:flex border-gray-300 text-gray-700 hover:bg-gray-50 h-10">
-                                    Área do Cliente
-                                </Button>
-                            </Link>
-                            <a href="tel:+551130000000">
-                                <Button className="bg-[#0052cc] hover:bg-[#003d99] text-white h-10 shadow-sm">
-                                    <Phone className="h-4 w-4 mr-2" />
-                                    <span className="hidden sm:inline">Fale Conosco</span>
-                                </Button>
-                            </a>
-                        </div>
+
                     </div>
                 </div>
             </header>
@@ -272,7 +260,7 @@ export default function HomePage() {
                             <ul className="space-y-2.5 text-sm text-white/60">
                                 <li><Link href="/sobre" className="hover:text-white transition-colors">A Empresa</Link></li>
                                 <li><Link href="/contato" className="hover:text-white transition-colors">Fale Conosco</Link></li>
-                                <li><Link href="/login" className="hover:text-white transition-colors">Área do Cliente</Link></li>
+
                             </ul>
                         </div>
 
