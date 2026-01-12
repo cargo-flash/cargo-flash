@@ -66,13 +66,33 @@ export async function POST(request: Request) {
             )
         }
 
-        const { order_id, customer, items, total } = validation.data
+        const { order_id, customer, items, total, origin } = validation.data
 
-        // Get simulation config
+        // Try to get warehouse for this API key
+        const { data: warehouse } = await supabase
+            .from('warehouses')
+            .select('*')
+            .eq('api_key_id', validKey.id)
+            .eq('is_default', true)
+            .eq('is_active', true)
+            .single()
+
+        // Get simulation config as fallback
         const { data: config } = await supabase
             .from('simulation_config')
             .select('*')
             .single()
+
+        // Determine origin with priority: 1. Warehouse, 2. Request origin, 3. Simulation config
+        const originData = {
+            company: warehouse?.name || origin?.company || config?.origin_company_name || 'Cargo Flash',
+            address: warehouse?.address || origin?.address || config?.origin_address || '',
+            city: warehouse?.city || origin?.city || config?.origin_city || 'São Paulo',
+            state: warehouse?.state || origin?.state || config?.origin_state || 'SP',
+            zip: warehouse?.zip || origin?.zip || config?.origin_zip || '',
+            lat: warehouse?.lat || config?.origin_lat || -23.5505,
+            lng: warehouse?.lng || config?.origin_lng || -46.6333,
+        }
 
         // Generate tracking code
         const trackingCode = generateTrackingCode()
@@ -95,13 +115,13 @@ export async function POST(request: Request) {
             .insert({
                 tracking_code: trackingCode,
                 status: 'pending',
-                sender_name: config?.origin_company_name,
-                origin_address: config?.origin_address,
-                origin_city: config?.origin_city,
-                origin_state: config?.origin_state,
-                origin_zip: config?.origin_zip,
-                origin_lat: config?.origin_lat,
-                origin_lng: config?.origin_lng,
+                sender_name: originData.company,
+                origin_address: originData.address,
+                origin_city: originData.city,
+                origin_state: originData.state,
+                origin_zip: originData.zip,
+                origin_lat: originData.lat,
+                origin_lng: originData.lng,
                 recipient_name: customer.name,
                 recipient_email: customer.email,
                 recipient_phone: customer.phone,
@@ -129,20 +149,27 @@ export async function POST(request: Request) {
         await supabase.from('delivery_history').insert({
             delivery_id: delivery.id,
             status: 'pending',
-            location: config?.origin_company_name || 'Centro de Distribuição',
-            city: config?.origin_city || 'São Paulo',
-            state: config?.origin_state || 'SP',
-            lat: config?.origin_lat,
-            lng: config?.origin_lng,
+            location: originData.company,
+            city: originData.city,
+            state: originData.state,
+            lat: originData.lat,
+            lng: originData.lng,
             description: `Pedido #${order_id} recebido via WooCommerce`,
         })
 
-        // Generate simulation events
-        if (config) {
-            const events = generateDeliveryEvents(delivery, config)
-            if (events.length > 0) {
-                await supabase.from('scheduled_events').insert(events)
-            }
+        // Generate simulation events using originData with config as fallback for timing
+        const simulationConfig = {
+            origin_city: originData.city,
+            origin_state: originData.state,
+            origin_lat: originData.lat,
+            origin_lng: originData.lng,
+            min_delivery_days: config?.min_delivery_days ?? 15,
+            max_delivery_days: config?.max_delivery_days ?? 19,
+        }
+
+        const events = generateDeliveryEvents(delivery, simulationConfig as never)
+        if (events.length > 0) {
+            await supabase.from('scheduled_events').insert(events)
         }
 
         // Log webhook success (fire and forget)
