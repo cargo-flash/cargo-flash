@@ -73,6 +73,9 @@ import { DeliveryDriverCard } from '@/components/tracking/delivery-driver-card'
 import { DeliverySignaturePad } from '@/components/tracking/delivery-signature-pad'
 import { SatisfactionSurvey } from '@/components/tracking/satisfaction-survey'
 
+// Auto-refresh component for real-time updates
+import { AutoRefresh } from '@/components/tracking/auto-refresh'
+
 interface PageProps {
     params: Promise<{ code: string }>
 }
@@ -181,6 +184,9 @@ export default async function PremiumTrackingPage({ params }: PageProps) {
 
             {/* Floating Action Buttons */}
             <FloatingActions trackingCode={code} status={status} />
+
+            {/* Auto-refresh every 60 seconds */}
+            <AutoRefresh intervalSeconds={60} showIndicator={true} />
 
 
 
