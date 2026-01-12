@@ -952,11 +952,18 @@ export function calculateDeliveryRoute(
     const baseDays = Math.ceil(totalDistance / 200) // ~200km per day average
     const totalDays = Math.min(Math.max(baseDays, minDays), maxDays)
 
-    // Start date: next business day
-    let startDate = addDays(new Date(), 1)
-    if (isWeekend(startDate)) {
-        startDate = addDays(startDate, startDate.getDay() === 6 ? 2 : 1)
+    // Start date: same day if before 14:00, otherwise next day
+    // Events will be scheduled starting from this date
+    const now = new Date()
+    let startDate = new Date(now)
+
+    // If order placed after 14:00, start simulation next day
+    if (now.getHours() >= 14) {
+        startDate = addDays(now, 1)
     }
+
+    // Note: We allow weekends for simulation purposes
+    // Real packages can show updates on weekends in tracking systems
 
     // Generate daily updates with tracking code for deterministic scheduling
     const dailyUpdates = generateDailyUpdates(waypoints, startDate, totalDays, trackingCode)
