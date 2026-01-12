@@ -545,9 +545,14 @@ export function generateDailyUpdates(
     let currentDate = new Date(startDate)
     let previousState = waypoints[0].state  // Track state for crossing detection
 
-    // Day 1: Collection - single update in morning
+    // Calculate collection time: 30 minutes from now for quick feedback
+    // This ensures the first event is processable on the next cron run
+    const collectionTime = new Date()
+    collectionTime.setMinutes(collectionTime.getMinutes() + 30)
+
+    // Day 1: Collection - scheduled 30 min from now for immediate processing
     updates.push({
-        scheduledFor: setHours(setMinutes(currentDate, 30), 9), // 09:30
+        scheduledFor: collectionTime,
         waypoint: waypoints[0],
         progressPercent: 0,
         description: 'Objeto coletado e em processamento',
