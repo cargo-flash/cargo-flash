@@ -15,7 +15,8 @@ import {
     X,
     Zap,
     Clock,
-    Shield
+    Shield,
+    Warehouse
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
@@ -36,6 +37,7 @@ const menuItems = [
     { icon: Users, label: 'Usuários', href: '/admin/usuarios' },
     { icon: BarChart3, label: 'Analytics', href: '/admin/analytics' },
     { icon: Truck, label: 'Simulação', href: '/admin/simulacao' },
+    { icon: Warehouse, label: 'Galpões', href: '/admin/galpoes' },
     { icon: Shield, label: 'Logs', href: '/admin/logs' },
     { icon: Settings, label: 'Configurações', href: '/admin/configuracoes' },
 ]
