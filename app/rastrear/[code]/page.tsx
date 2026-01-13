@@ -76,6 +76,9 @@ import { SatisfactionSurvey } from '@/components/tracking/satisfaction-survey'
 // Auto-refresh component for real-time updates
 import { AutoRefresh } from '@/components/tracking/auto-refresh'
 
+// Distance Counter for immersive tracking
+import { DistanceCounter } from '@/components/tracking/distance-counter'
+
 interface PageProps {
     params: Promise<{ code: string }>
 }
@@ -282,7 +285,22 @@ export default async function PremiumTrackingPage({ params }: PageProps) {
                     <PremiumProgressSteps status={status} />
                 </section>
 
-
+                {/* Distance Counter - Shows remaining distance to destination */}
+                {!isDelivered && (
+                    <section className="mb-10">
+                        <DistanceCounter
+                            currentLat={currentLat}
+                            currentLng={currentLng}
+                            destinationLat={delivery.destination_lat}
+                            destinationLng={delivery.destination_lng}
+                            originLat={delivery.origin_lat}
+                            originLng={delivery.origin_lng}
+                            progressPercent={progressPercent}
+                            estimatedDelivery={delivery.estimated_delivery}
+                            status={status}
+                        />
+                    </section>
+                )}
 
                 {/* Driver Info (when out for delivery) */}
                 {isOutForDelivery && (delivery.driver_name || delivery.driver_phone) && (
