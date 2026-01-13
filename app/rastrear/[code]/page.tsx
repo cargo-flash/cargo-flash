@@ -441,8 +441,7 @@ export default async function PremiumTrackingPage({ params }: PageProps) {
 
 
 
-                        {/* Support Card */}
-                        <SupportCard trackingCode={code} status={status} />
+
 
                         {/* Share Card */}
                         <ShareCard trackingCode={code} />
