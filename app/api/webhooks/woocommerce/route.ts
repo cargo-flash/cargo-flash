@@ -154,7 +154,7 @@ export async function POST(request: Request) {
             state: originData.state,
             lat: originData.lat,
             lng: originData.lng,
-            description: `Pedido #${order_id} recebido via WooCommerce`,
+            description: 'Objeto postado - Aguardando coleta',
         })
 
         // Generate simulation events using originData with config as fallback for timing
