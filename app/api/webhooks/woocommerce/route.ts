@@ -7,11 +7,17 @@ import { format } from 'date-fns'
 import bcrypt from 'bcryptjs'
 
 export async function POST(request: Request) {
+    const startTime = Date.now()
+    console.log('[WooCommerce Webhook] Request received at', new Date().toISOString())
+
     try {
         // Verify API Key
         const apiKey = request.headers.get('x-api-key')
+        console.log('[WooCommerce Webhook] API Key present:', !!apiKey)
+        console.log('[WooCommerce Webhook] API Key prefix:', apiKey?.substring(0, 10) + '...')
 
         if (!apiKey) {
+            console.log('[WooCommerce Webhook] ERROR: No API Key provided')
             return NextResponse.json(
                 { success: false, error: 'API Key não fornecida' },
                 { status: 401 }
@@ -21,28 +27,44 @@ export async function POST(request: Request) {
         const supabase = await createServiceClient()
 
         // Find and verify API key
-        const { data: keys } = await supabase
+        const { data: keys, error: keysError } = await supabase
             .from('api_keys')
             .select('*')
             .eq('is_active', true)
 
+        console.log('[WooCommerce Webhook] Active keys found:', keys?.length || 0)
+        if (keysError) {
+            console.log('[WooCommerce Webhook] Keys fetch error:', keysError.message)
+        }
+
         let validKey = null
         for (const key of keys || []) {
-            if (await bcrypt.compare(apiKey, key.key_hash)) {
-                validKey = key
-                break
+            console.log('[WooCommerce Webhook] Checking key:', key.name, '- Hash prefix:', key.key_hash?.substring(0, 20) + '...')
+            try {
+                const isMatch = await bcrypt.compare(apiKey, key.key_hash)
+                console.log('[WooCommerce Webhook] Key match result for', key.name, ':', isMatch)
+                if (isMatch) {
+                    validKey = key
+                    break
+                }
+            } catch (bcryptError) {
+                console.log('[WooCommerce Webhook] bcrypt error for key', key.name, ':', bcryptError)
             }
         }
 
         if (!validKey) {
+            console.log('[WooCommerce Webhook] ERROR: No matching API key found')
             return NextResponse.json(
                 { success: false, error: 'API Key inválida' },
                 { status: 401 }
             )
         }
 
+        console.log('[WooCommerce Webhook] Valid key found:', validKey.name)
+
         // Check expiration
         if (validKey.expires_at && new Date(validKey.expires_at) < new Date()) {
+            console.log('[WooCommerce Webhook] ERROR: API Key expired')
             return NextResponse.json(
                 { success: false, error: 'API Key expirada' },
                 { status: 401 }
@@ -57,14 +79,19 @@ export async function POST(request: Request) {
 
         // Parse and validate body
         const body = await request.json()
+        console.log('[WooCommerce Webhook] Request body:', JSON.stringify(body, null, 2))
+
         const validation = wooCommerceWebhookSchema.safeParse(body)
 
         if (!validation.success) {
+            console.log('[WooCommerce Webhook] Validation error:', JSON.stringify(validation.error.flatten()))
             return NextResponse.json(
                 { success: false, error: 'Dados inválidos', details: validation.error.flatten() },
                 { status: 400 }
             )
         }
+
+        console.log('[WooCommerce Webhook] Validation passed')
 
         const { order_id, customer, items, total, origin } = validation.data
 
@@ -78,10 +105,12 @@ export async function POST(request: Request) {
             .single()
 
         // Get simulation config as fallback
-        const { data: config } = await supabase
+        const { data: config, error: configError } = await supabase
             .from('simulation_config')
             .select('*')
             .single()
+
+        console.log('[WooCommerce Webhook] Config loaded:', !!config, configError?.message || 'OK')
 
         // Determine origin with priority: 1. Warehouse, 2. Request origin, 3. Simulation config
         const originData = {
@@ -96,6 +125,7 @@ export async function POST(request: Request) {
 
         // Generate tracking code
         const trackingCode = generateTrackingCode()
+        console.log('[WooCommerce Webhook] Generated tracking code:', trackingCode)
 
         // Calculate estimated delivery
         const estimatedDelivery = estimateDeliveryDate(
@@ -108,6 +138,8 @@ export async function POST(request: Request) {
         const packageDescription = items
             ?.map((item) => `${item.quantity}x ${item.name}`)
             .join(', ') || `Pedido #${order_id}`
+
+        console.log('[WooCommerce Webhook] Creating delivery...')
 
         // Create delivery
         const { data: delivery, error: createError } = await supabase
@@ -126,24 +158,26 @@ export async function POST(request: Request) {
                 recipient_email: customer.email,
                 recipient_phone: customer.phone,
                 destination_address: `${customer.address.street}${customer.address.complement ? `, ${customer.address.complement}` : ''}`,
-                destination_city: customer.address.city,
-                destination_state: customer.address.state,
+                destination_city: customer.address.city || 'Não informada',
+                destination_state: customer.address.state || 'SP',
                 destination_zip: customer.address.zip?.replace(/\D/g, ''),
                 package_description: packageDescription,
                 estimated_delivery: format(estimatedDelivery, 'yyyy-MM-dd'),
-                current_location: `${config?.origin_city || 'São Paulo'}, ${config?.origin_state || 'SP'}`,
+                current_location: `${originData.city}, ${originData.state}`,
                 insurance_value: total || 0,
             })
             .select()
             .single()
 
         if (createError || !delivery) {
-            console.error('Create delivery error:', createError)
+            console.error('[WooCommerce Webhook] Create delivery error:', createError)
             return NextResponse.json(
-                { success: false, error: 'Erro ao criar entrega' },
+                { success: false, error: 'Erro ao criar entrega: ' + (createError?.message || 'unknown') },
                 { status: 500 }
             )
         }
+
+        console.log('[WooCommerce Webhook] Delivery created:', delivery.id)
 
         // Create initial history
         await supabase.from('delivery_history').insert({
@@ -170,10 +204,11 @@ export async function POST(request: Request) {
         const events = generateDeliveryEvents(delivery, simulationConfig as never)
         if (events.length > 0) {
             await supabase.from('scheduled_events').insert(events)
+            console.log('[WooCommerce Webhook] Scheduled events created:', events.length)
         }
 
-        // Log webhook success (fire and forget)
-        supabase.from('webhook_logs').insert({
+        // Log webhook success
+        await supabase.from('webhook_logs').insert({
             source: 'woocommerce',
             endpoint: '/api/webhooks/woocommerce',
             method: 'POST',
@@ -184,17 +219,32 @@ export async function POST(request: Request) {
             api_key_id: validKey.id,
         })
 
+        const duration = Date.now() - startTime
+        console.log('[WooCommerce Webhook] SUCCESS in', duration, 'ms - Tracking:', trackingCode)
+
         return NextResponse.json({
             success: true,
             tracking_code: trackingCode,
             delivery_id: delivery.id,
             estimated_delivery: format(estimatedDelivery, 'yyyy-MM-dd'),
+            tracking_url: `https://cargoflash.com.br/rastrear/${trackingCode}`,
         })
     } catch (error) {
-        console.error('WooCommerce webhook error:', error)
+        console.error('[WooCommerce Webhook] FATAL ERROR:', error)
         return NextResponse.json(
-            { success: false, error: 'Erro interno' },
+            { success: false, error: 'Erro interno: ' + (error instanceof Error ? error.message : 'unknown') },
             { status: 500 }
         )
     }
+}
+
+// Also support GET for health check
+export async function GET() {
+    return NextResponse.json({
+        status: 'ok',
+        endpoint: 'WooCommerce Webhook',
+        method: 'POST required',
+        headers: { 'x-api-key': 'required' },
+        body: { order_id: 'required', customer: 'required' },
+    })
 }
