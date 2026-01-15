@@ -52,8 +52,8 @@ class Cargo_Flash_Tracking {
     }
     
     private function __construct() {
-        $this->api_url = rtrim(get_option('cft_api_url', ''), '/');
-        $this->api_key = get_option('cft_api_key', '');
+        $this->api_url = rtrim(trim(get_option('cft_api_url', '')), '/');
+        $this->api_key = trim(get_option('cft_api_key', ''));
         $this->settings = [
             'auto_send' => get_option('cft_auto_send', 'yes'),
             'trigger_status' => get_option('cft_trigger_status', 'processing'),
@@ -909,19 +909,31 @@ class Cargo_Flash_Tracking {
         
         $success = 0;
         $failed = 0;
+        $errors = [];
         
         foreach ($orders as $order) {
             $existing = $this->get_tracking_code($order);
             if (!empty($existing)) continue;
             
             $result = $this->sync_order($order->get_id());
-            $result['success'] ? $success++ : $failed++;
+            if ($result['success']) {
+                $success++;
+            } else {
+                $failed++;
+                $errors[] = 'Pedido #' . $order->get_id() . ': ' . ($result['error'] ?? 'Erro desconhecido');
+            }
+        }
+        
+        $message = "$success enviados, $failed falhas";
+        if (!empty($errors)) {
+            $message .= '. Erros: ' . implode(' | ', array_slice($errors, 0, 3));
         }
         
         wp_send_json_success([
             'success_count' => $success,
             'failed_count' => $failed,
-            'message' => "$success enviados, $failed falhas",
+            'message' => $message,
+            'errors' => $errors,
         ]);
     }
     
