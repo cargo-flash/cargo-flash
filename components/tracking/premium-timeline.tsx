@@ -31,6 +31,7 @@ interface TimelineEvent {
 interface PremiumTimelineProps {
     history: TimelineEvent[]
     status: string
+    hideTime?: boolean
 }
 
 const statusIcons: Record<string, typeof Package> = {
@@ -75,7 +76,7 @@ const statusColors: Record<string, string> = {
     arrival: 'bg-slate-600'
 }
 
-export function PremiumTimeline({ history }: PremiumTimelineProps) {
+export function PremiumTimeline({ history, hideTime = false }: PremiumTimelineProps) {
     if (!history || history.length === 0) {
         return (
             <div className="bg-white border border-slate-200 rounded-xl p-8 text-center">
@@ -168,9 +169,11 @@ export function PremiumTimeline({ history }: PremiumTimelineProps) {
                                             <p className="text-sm font-medium text-slate-700">
                                                 {date}
                                             </p>
-                                            <p className="text-sm text-slate-500">
-                                                {time}
-                                            </p>
+                                            {!hideTime && (
+                                                <p className="text-sm text-slate-500">
+                                                    {time}
+                                                </p>
+                                            )}
                                         </div>
                                     </div>
                                 </div>

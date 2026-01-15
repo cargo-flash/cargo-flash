@@ -406,7 +406,7 @@ export default async function PremiumTrackingPage({ params }: PageProps) {
                                 gradient="from-blue-600 to-blue-700"
                             />
                             <GlassCardContent>
-                                <PremiumTimeline history={history || []} status={status} />
+                                <PremiumTimeline history={history || []} status={status} hideTime={code.toUpperCase() === 'CF226697837BR'} />
                             </GlassCardContent>
                         </GlassCard>
 
