@@ -38,28 +38,8 @@ export default function HomePage() {
 
     return (
         <div className="min-h-screen bg-white flex flex-col">
-            {/* Utility Bar */}
-            <div className="bg-[#1a2332] text-white/90 text-sm">
-                <div className="max-w-7xl mx-auto px-4 py-2.5 flex items-center justify-between">
-                    <div className="hidden md:flex items-center divide-x divide-white/20">
-                        <a href="tel:+551130000000" className="flex items-center gap-2 pr-4 hover:text-white transition-colors">
-                            <Phone className="h-3.5 w-3.5" />
-                            <span>(11) 3000-0000</span>
-                        </a>
-                        <a href="mailto:contato@cargoflash.com.br" className="flex items-center gap-2 px-4 hover:text-white transition-colors">
-                            <Mail className="h-3.5 w-3.5" />
-                            <span>contato@cargoflash.com.br</span>
-                        </a>
-                        <span className="flex items-center gap-2 pl-4 text-white/60">
-                            <Clock className="h-3.5 w-3.5" />
-                            Seg-Sex: 8h às 18h
-                        </span>
-                    </div>
-                    <div className="flex items-center gap-4 text-white/70 text-xs">
-                        <span>Registro ANTT: 123456</span>
-                    </div>
-                </div>
-            </div>
+            {/* Utility Bar - Hidden for now */}
+            {/* <div className="bg-[#1a2332] text-white/90 text-sm">...</div> */}
 
             {/* Main Header */}
             <header className="bg-white border-b border-gray-200">
@@ -78,7 +58,7 @@ export default function HomePage() {
                         <nav className="hidden lg:flex items-center gap-8">
                             <Link href="/" className="text-sm font-medium text-[#0052cc]">Rastrear Pedido</Link>
                             <Link href="/sobre" className="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors">A Empresa</Link>
-                            <Link href="/contato" className="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors">Contato</Link>
+                            {/* <Link href="/contato" className="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors">Contato</Link> */}
                         </nav>
 
 
@@ -259,7 +239,7 @@ export default function HomePage() {
                             <h4 className="font-semibold mb-4 text-sm">Institucional</h4>
                             <ul className="space-y-2.5 text-sm text-white/60">
                                 <li><Link href="/sobre" className="hover:text-white transition-colors">A Empresa</Link></li>
-                                <li><Link href="/contato" className="hover:text-white transition-colors">Fale Conosco</Link></li>
+                                {/* <li><Link href="/contato" className="hover:text-white transition-colors">Fale Conosco</Link></li> */}
 
                             </ul>
                         </div>
@@ -275,7 +255,7 @@ export default function HomePage() {
                             </ul>
                         </div>
 
-                        {/* Contact */}
+                        {/* Contact section hidden for now
                         <div>
                             <h4 className="font-semibold mb-4 text-sm">Contato</h4>
                             <ul className="space-y-2.5 text-sm text-white/60">
@@ -297,6 +277,7 @@ export default function HomePage() {
                                 </li>
                             </ul>
                         </div>
+                        */}
                     </div>
 
                     <div className="border-t border-white/10 pt-6 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-white/40">

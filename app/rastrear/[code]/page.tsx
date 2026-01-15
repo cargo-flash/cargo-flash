@@ -504,7 +504,7 @@ export default async function PremiumTrackingPage({ params }: PageProps) {
                         <div className="flex items-center gap-6 text-sm">
                             <a href="/termos" className="hover:text-[#1e3a5f] transition-colors">Termos</a>
                             <a href="/privacidade" className="hover:text-[#1e3a5f] transition-colors">Privacidade</a>
-                            <a href="/contato" className="hover:text-[#1e3a5f] transition-colors">Contato</a>
+                            {/* <a href="/contato" className="hover:text-[#1e3a5f] transition-colors">Contato</a> */}
                         </div>
                     </div>
                 </div>
