@@ -164,7 +164,6 @@ export async function POST(request: Request) {
                 package_description: packageDescription,
                 estimated_delivery: format(estimatedDelivery, 'yyyy-MM-dd'),
                 current_location: `${originData.city}, ${originData.state}`,
-                insurance_value: total || 0,
             })
             .select()
             .single()
