@@ -64,11 +64,11 @@ export function AutoRefresh({ intervalSeconds = 60, showIndicator = true }: Auto
     }
 
     return (
-        <div className="fixed bottom-4 left-4 z-40">
+        <div className="fixed bottom-20 left-4 sm:bottom-4 z-40">
             <button
                 onClick={handleManualRefresh}
                 disabled={isRefreshing}
-                className="flex items-center gap-2 px-3 py-2 bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm rounded-full shadow-lg border border-gray-200 dark:border-gray-700 text-sm text-gray-600 dark:text-gray-300 hover:bg-white dark:hover:bg-gray-800 transition-all"
+                className="flex items-center gap-2 px-3 py-2 bg-white/95 dark:bg-gray-800/95 backdrop-blur-sm rounded-full shadow-lg border border-gray-200 dark:border-gray-700 text-sm text-gray-600 dark:text-gray-300 hover:bg-white dark:hover:bg-gray-800 transition-all"
             >
                 <RefreshCw
                     className={`h-4 w-4 ${isRefreshing ? 'animate-spin text-blue-500' : ''}`}

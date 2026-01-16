@@ -22,6 +22,7 @@ import { Button } from '@/components/ui/button'
 export default function HomePage() {
     const [mounted, setMounted] = useState(false)
     const [trackingCode, setTrackingCode] = useState('')
+    const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
     useEffect(() => {
         setMounted(true)
@@ -61,8 +62,59 @@ export default function HomePage() {
                             {/* <Link href="/contato" className="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors">Contato</Link> */}
                         </nav>
 
-
+                        {/* Mobile Menu Button */}
+                        <button
+                            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                            className="lg:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors"
+                            aria-label="Menu"
+                        >
+                            {mobileMenuOpen ? (
+                                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                                </svg>
+                            ) : (
+                                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                                </svg>
+                            )}
+                        </button>
                     </div>
+
+                    {/* Mobile Menu Dropdown */}
+                    {mobileMenuOpen && (
+                        <div className="lg:hidden border-t border-gray-200 py-4 animate-in slide-in-from-top-2 duration-200">
+                            <nav className="flex flex-col gap-2">
+                                <Link
+                                    href="/"
+                                    className="px-4 py-3 text-sm font-medium text-[#0052cc] bg-blue-50 rounded-lg"
+                                    onClick={() => setMobileMenuOpen(false)}
+                                >
+                                    Rastrear Pedido
+                                </Link>
+                                <Link
+                                    href="/sobre"
+                                    className="px-4 py-3 text-sm font-medium text-gray-600 hover:bg-gray-50 rounded-lg transition-colors"
+                                    onClick={() => setMobileMenuOpen(false)}
+                                >
+                                    A Empresa
+                                </Link>
+                                <Link
+                                    href="/termos"
+                                    className="px-4 py-3 text-sm font-medium text-gray-600 hover:bg-gray-50 rounded-lg transition-colors"
+                                    onClick={() => setMobileMenuOpen(false)}
+                                >
+                                    Termos de Uso
+                                </Link>
+                                <Link
+                                    href="/privacidade"
+                                    className="px-4 py-3 text-sm font-medium text-gray-600 hover:bg-gray-50 rounded-lg transition-colors"
+                                    onClick={() => setMobileMenuOpen(false)}
+                                >
+                                    Política de Privacidade
+                                </Link>
+                            </nav>
+                        </div>
+                    )}
                 </div>
             </header>
 

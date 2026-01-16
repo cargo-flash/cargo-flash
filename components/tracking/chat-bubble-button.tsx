@@ -58,7 +58,7 @@ export function ChatBubbleButton({ trackingCode, status }: ChatBubbleButtonProps
         <>
             {/* Chat Window */}
             {isOpen && (
-                <div className="fixed bottom-24 right-4 md:right-8 w-[360px] max-w-[calc(100vw-2rem)] bg-white rounded-3xl shadow-2xl border border-slate-200 overflow-hidden z-50 animate-in slide-in-from-bottom-4 duration-300">
+                <div className="fixed bottom-36 right-4 sm:bottom-24 md:right-8 w-[360px] max-w-[calc(100vw-2rem)] bg-white rounded-3xl shadow-2xl border border-slate-200 overflow-hidden z-50 animate-in slide-in-from-bottom-4 duration-300">
                     {/* Header */}
                     <div className="bg-gradient-to-r from-indigo-500 to-purple-600 p-4">
                         <div className="flex items-center justify-between">
@@ -145,7 +145,7 @@ export function ChatBubbleButton({ trackingCode, status }: ChatBubbleButtonProps
             <button
                 onClick={() => setIsOpen(!isOpen)}
                 className={`
-                    fixed bottom-8 right-4 md:right-8 z-50
+                    fixed bottom-20 right-4 sm:bottom-8 md:right-8 z-50
                     w-16 h-16 rounded-full shadow-2xl
                     flex items-center justify-center
                     transition-all duration-300
