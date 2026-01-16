@@ -5,9 +5,9 @@ import {
     CheckCircle2,
     FileText,
     AlertTriangle,
-    Phone,
     ShieldCheck
 } from 'lucide-react'
+
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 
@@ -59,8 +59,8 @@ export function InsuranceInfoCard({ trackingCode, declaredValue, hasInsurance = 
                 </div>
                 <Badge
                     className={`font-semibold ${hasInsurance
-                            ? 'bg-emerald-50 text-emerald-700 border-emerald-200'
-                            : 'bg-slate-50 text-slate-500 border-slate-200'
+                        ? 'bg-emerald-50 text-emerald-700 border-emerald-200'
+                        : 'bg-slate-50 text-slate-500 border-slate-200'
                         }`}
                     variant="outline"
                 >
@@ -117,22 +117,6 @@ export function InsuranceInfoCard({ trackingCode, declaredValue, hasInsurance = 
                                         <span className="font-medium">{item}</span>
                                     </div>
                                 ))}
-                            </div>
-                        </div>
-
-                        {/* How to Claim */}
-                        <div className="border border-slate-200 rounded-xl p-4">
-                            <p className="text-[10px] text-slate-400 uppercase tracking-wider font-semibold mb-3">
-                                Em caso de sinistro
-                            </p>
-                            <div className="flex items-center gap-4">
-                                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-slate-100 to-slate-50 flex items-center justify-center border border-slate-200">
-                                    <Phone className="w-5 h-5 text-slate-600" />
-                                </div>
-                                <div>
-                                    <p className="font-bold text-slate-800 text-lg">0800 580 1234</p>
-                                    <p className="text-xs text-slate-500 font-medium">24h • Abertura de sinistro</p>
-                                </div>
                             </div>
                         </div>
 
